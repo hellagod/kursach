@@ -1,0 +1,163 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6280,        155]
+NotebookOptionsPosition[      5287,        131]
+NotebookOutlinePosition[      5705,        147]
+CellTagsIndexPosition[      5662,        144]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\:0412\:044b\:0431\:0438\:0440\:0430\:0435\:043c \:0433\:043e\:0434", \
+"Text",
+ CellChangeTimes->{{3.858921360255988*^9, 3.858921408043008*^9}, {
+  3.858922319075142*^9, 
+  3.8589223335061903`*^9}},ExpressionUUID->"ee2ef9c1-104a-4b28-b67d-\
+56783960b140"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{
+    RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+    "\"\<\\\\data\\\\years\>\""}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"years", "=", 
+   RowBox[{"FileNames", "[", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"year", "=", 
+   RowBox[{"First", "@", "years"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"SetterBar", "[", 
+  RowBox[{
+   RowBox[{"Dynamic", "[", "year", "]"}], ",", "years"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.8589214177479744`*^9, 3.858921485140976*^9}, {
+   3.8589215670211363`*^9, 3.858921625575178*^9}, {3.8589217197491417`*^9, 
+   3.8589217775101776`*^9}, {3.858921816817203*^9, 3.8589218282611456`*^9}, {
+   3.858921920942176*^9, 3.858921930972142*^9}, {3.85892199524514*^9, 
+   3.8589220369821806`*^9}, {3.858922067507188*^9, 3.858922098396185*^9}, {
+   3.85892212971914*^9, 3.858922150515147*^9}, 3.858922337248175*^9},
+ CellLabel->"In[7]:=",ExpressionUUID->"f48441ad-77d8-466a-9a8b-f1f2135e5a83"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[GridBox[{
+     {
+      SetterBox[Dynamic[$CellContext`year], {"2018"}, "\<\"2018\"\>"], 
+      SetterBox[Dynamic[$CellContext`year], {"2021"}, "\<\"2021\"\>"]}
+    },
+    BaselinePosition->{1, 1},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}],
+   Deployed->True],
+  SetterBar[
+   Dynamic[$CellContext`year], {"2018", "2021"}]]], "Output",
+ CellChangeTimes->{
+  3.8589214854610014`*^9, {3.8589215744371305`*^9, 3.8589216220031404`*^9}, {
+   3.858921740518139*^9, 3.858921807289141*^9}, {3.8589219229491444`*^9, 
+   3.8589219409921503`*^9}, {3.858922005739142*^9, 3.858922037746176*^9}, {
+   3.858922081090139*^9, 3.8589221508981404`*^9}, 3.8589222592321744`*^9, 
+   3.858922351964139*^9, 3.8589224123601465`*^9, 3.8589224443691425`*^9},
+ CellLabel->"Out[10]=",ExpressionUUID->"2299f4dc-e1d6-45ef-ab12-6c547f417def"]
+}, Open  ]],
+
+Cell["\:0421\:043a\:0430\:0447\:0438\:0432\:0430\:0435\:043c \:0432\:0441\
+\:0435 \:0434\:0430\:043d\:043d\:044b\:0435 \:0437\:0430 \:0432\:044b\:0431\
+\:0440\:0430\:043d\:043d\:044b\:0439 \:0433\:043e\:0434", "Text",
+ CellChangeTimes->{{3.8589223132691383`*^9, 
+  3.8589223259391727`*^9}},ExpressionUUID->"7109b449-fcf2-4b82-b948-\
+6f1758b45f84"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"namesOfMonthsData", " ", "=", " ", 
+   RowBox[{"Import", "[", "year", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"SetDirectory", "[", "year", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"yearData", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"TakeDrop", "[", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"m", ",", " ", "\"\<Data\>\""}], "]"}], ",", "1"}], "]"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"m", ",", "namesOfMonthsData"}], "}"}]}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8589198864356656`*^9, 3.858919955266997*^9}, {
+   3.8589199878331227`*^9, 3.8589200401410413`*^9}, {3.8589200935130453`*^9, 
+   3.85892036579126*^9}, {3.858920450050295*^9, 3.8589206810858173`*^9}, 
+   3.858920761782824*^9, {3.8589208144458113`*^9, 3.858920838530813*^9}, {
+   3.8589208848038225`*^9, 3.8589209136308203`*^9}, {3.858920952082843*^9, 
+   3.8589209549368124`*^9}, {3.8589210484488125`*^9, 3.858921095848017*^9}, {
+   3.8589212522529917`*^9, 3.858921342231993*^9}, 3.858921440011972*^9, {
+   3.858921808987186*^9, 3.8589218103981934`*^9}, {3.8589219440811453`*^9, 
+   3.8589219454651794`*^9}, {3.8589220434461713`*^9, 3.858922046025181*^9}, {
+   3.858922077729138*^9, 3.858922105980138*^9}, {3.8589221643821726`*^9, 
+   3.8589221648831778`*^9}, {3.8589221985451746`*^9, 3.858922302589151*^9}, {
+   3.858922350894146*^9, 3.858922390743182*^9}, {3.8589224280741396`*^9, 
+   3.8589224795871415`*^9}, {3.8589226606059866`*^9, 
+   3.85892266432999*^9}},ExpressionUUID->"995d534e-f754-44f5-9e2d-\
+881a16c58bb5"],
+
+Cell[BoxData["\<\"G:\\\\kursach\\\\data\\\\years\\\\2018\"\>"], "Output",
+ CellChangeTimes->{3.8589224803821487`*^9},
+ CellLabel->"Out[15]=",ExpressionUUID->"a3a6e920-ce9c-4045-8c56-bddc38d83eef"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.8589224912571397`*^9, 
+  3.8589224915191436`*^9}},ExpressionUUID->"9bd71ca5-a7fd-45d7-bd30-\
+8fe7daac4aa3"]
+},
+WindowSize->{574.8, 579.6},
+WindowMargins->{{Automatic, -4.7999999999999545`}, {Automatic, 0}},
+FrontEndVersion->"12.3 for Microsoft Windows (64-bit) (July 9, 2021)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"5284359a-c855-406c-b6bf-8b77c33faf5c"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 262, 5, 35, "Text",ExpressionUUID->"ee2ef9c1-104a-4b28-b67d-56783960b140"],
+Cell[CellGroupData[{
+Cell[845, 29, 1033, 21, 86, "Input",ExpressionUUID->"f48441ad-77d8-466a-9a8b-f1f2135e5a83"],
+Cell[1881, 52, 1034, 24, 43, "Output",ExpressionUUID->"2299f4dc-e1d6-45ef-ab12-6c547f417def"]
+}, Open  ]],
+Cell[2930, 79, 347, 5, 35, "Text",ExpressionUUID->"7109b449-fcf2-4b82-b948-6f1758b45f84"],
+Cell[CellGroupData[{
+Cell[3302, 88, 1611, 31, 86, "Input",ExpressionUUID->"995d534e-f754-44f5-9e2d-881a16c58bb5"],
+Cell[4916, 121, 196, 2, 32, "Output",ExpressionUUID->"a3a6e920-ce9c-4045-8c56-bddc38d83eef"]
+}, Open  ]],
+Cell[5127, 126, 156, 3, 28, "Input",ExpressionUUID->"9bd71ca5-a7fd-45d7-bd30-8fe7daac4aa3"]
+}
+]
+*)
+
