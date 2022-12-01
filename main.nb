@@ -1,0 +1,2014 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     80563,       2006]
+NotebookOptionsPosition[     79027,       1977]
+NotebookOutlinePosition[     79500,       1995]
+CellTagsIndexPosition[     79457,       1992]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"year", " ", "=", 
+   TemplateBox[<|
+    "boxes" -> FormBox["2018", TraditionalForm], "errors" -> {}, "input" -> 
+     "2018", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"month", " ", "=", " ", "7"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"day", " ", "=", " ", "12"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"stime", " ", "=", " ", "2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ftime", " ", "=", " ", "3"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"distance", " ", "=", " ", "5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"price", " ", "=", " ", "17"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"szone", " ", "=", " ", "8"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fzone", " ", "=", " ", "9"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"carsCount", " ", "=", " ", 
+   TemplateBox[<|
+    "boxes" -> FormBox["10000", TraditionalForm], "errors" -> {}, "input" -> 
+     "10000", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fz", " ", "=", " ", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ft", " ", "=", " ", "2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gas", " ", "=", " ", "3"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"amount", " ", "=", " ", "4"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"count", " ", "=", " ", "5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"waitingTime", " ", "=", " ", 
+   RowBox[{"100", " ", "60", " ", "1000"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sampleSize", " ", "=", " ", "20"}], ";"}]}], "Input",
+ CellChangeTimes->{
+  3.8776875212516155`*^9, {3.877687650098478*^9, 3.877687654631503*^9}, {
+   3.8776876920258102`*^9, 3.8776877031930814`*^9}, {3.877691760387388*^9, 
+   3.877691761434489*^9}, {3.877758098980405*^9, 3.877758099865906*^9}, {
+   3.8778521350701933`*^9, 3.877852167395563*^9}, {3.877852310520752*^9, 
+   3.877852356984657*^9}, {3.8778524505937014`*^9, 3.8778524509882593`*^9}, {
+   3.877852543507818*^9, 3.877852545060446*^9}, {3.8783611087716427`*^9, 
+   3.878361111485492*^9}, {3.878368734813532*^9, 3.8783687368354173`*^9}, {
+   3.8783687878897347`*^9, 3.878368790121501*^9}, {3.878639391656952*^9, 
+   3.8786394210272527`*^9}, {3.8786396663908043`*^9, 3.878639673106575*^9}, {
+   3.878646833446123*^9, 3.8786468375698543`*^9}, {3.878721427800105*^9, 
+   3.878721428820097*^9}, {3.8788079247671957`*^9, 
+   3.8788079335903144`*^9}},ExpressionUUID->"1aafb0a5-1645-45ce-8c12-\
+fbf736648291"],
+
+Cell[BoxData["\:044d"], "Output",
+ CellChangeTimes->{{3.878807925551976*^9, 3.8788079304634056`*^9}},
+ CellLabel->"Out[88]=",ExpressionUUID->"01ac501b-2896-4757-8de1-ef147f109f44"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", 
+   RowBox[{
+   "AddZ", ",", "PolygonZoneBorders", ",", "PolyhedronZone", ",", " ", 
+    "FlattenCon", ",", "NormTime", ",", "MronTime", ",", " ", "PositiveRound",
+     ",", " ", "OO", ",", " ", "GetMatrix", ",", " ", "GetNearestZones", ",", 
+    " ", "GetNumberHour"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"NormTime", "[", "time_", "]"}], ":=", " ", 
+   RowBox[{
+    RowBox[{"time", " ", "/", " ", "1000"}], " ", "+", "2208999600"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"MronTime", "[", "time_", "]"}], ":=", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"time", "-", "2208999600"}], ")"}], "*", "1000"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PositiveRound", "[", 
+    RowBox[{"i_", "?", " ", "Negative"}], "]"}], ":=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"PositiveRound", "[", "i___", "]"}], ":=", "i"}], ";"}], 
+  " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"OO", "[", "obj_", "]"}], ":=", " ", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"s", " ", "=", " ", 
+       RowBox[{"ToString", "@", "obj"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"StringRepeat", "[", 
+       RowBox[{"\"\<0\>\"", ",", " ", 
+        RowBox[{"PositiveRound", "@", 
+         RowBox[{"(", 
+          RowBox[{"2", "-", 
+           RowBox[{"StringLength", "@", "s"}]}], ")"}]}]}], "]"}], "<>", 
+      "s"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GetMatrix", "[", "l_List", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"frec", ",", " ", 
+      RowBox[{"matrix", " ", "=", " ", 
+       RowBox[{"ConstantArray", "[", 
+        RowBox[{
+         RowBox[{"ConstantArray", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"0", ",", "0"}], "}"}], ",", "263"}], "]"}], ",", " ", 
+         "263"}], "]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"frec", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"x_", ",", " ", "y_"}], "}"}], ",", "d_"}], "}"}], "]"}], ":=",
+       " ", 
+      RowBox[{
+       RowBox[{"matrix", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{"Max", "[", 
+           RowBox[{"x", ",", "y"}], "]"}], ",", " ", 
+          RowBox[{"Min", "[", 
+           RowBox[{"x", ",", "y"}], "]"}], ",", " ", "1"}], "]"}], "]"}], "+=",
+        " ", 
+       RowBox[{"{", 
+        RowBox[{"d", ",", " ", "1"}], "}"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"frec", " ", "/@", " ", "l"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"matrix", " ", "+=", " ", 
+      RowBox[{"Transpose", "@", "matrix"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"#", "===", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "0"}], "}"}]}], ",", " ", "Infinity", ",", " ", 
+          RowBox[{"Divide", "@@", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}], "&"}], ",", " ", 
+       "matrix", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetMatrixSet", "[", "sortedOrders_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "sortedOrdersWithoutMistake", ",", "ordersByHours", ",", 
+       "distanceMatrixByHours", ",", "timeMatrixByHours"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"sortedOrdersWithoutMistake", " ", "=", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "ftime", "]"}], "]"}], "-", 
+              RowBox[{"#", "[", 
+               RowBox[{"[", "stime", "]"}], "]"}]}], " ", ">", " ", 
+             "7200000"}], ",", " ", "Nothing", ",", " ", "#"}], "]"}], "&"}], 
+         ",", "sortedOrders"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ordersByHours", " ", "=", " ", 
+       RowBox[{"SplitBy", "[", 
+        RowBox[{"sortedOrdersWithoutMistake", ",", " ", 
+         RowBox[{
+          RowBox[{"Mod", "[", 
+           RowBox[{
+            RowBox[{"GetNumberHour", "@", "#"}], ",", "24"}], "]"}], "&"}]}], 
+        "]"}]}], " ", ";", "\[IndentingNewLine]", 
+      RowBox[{"distanceMatrixByHours", " ", "=", " ", 
+       RowBox[{"GetMatrix", "/@", 
+        RowBox[{"Map", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "szone", "]"}], "]"}], ",", " ", 
+               RowBox[{"#", "[", 
+                RowBox[{"[", "fzone", "]"}], "]"}]}], "}"}], ",", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "distance", "]"}], "]"}]}], "}"}], "&"}], ",", 
+          "ordersByHours", ",", " ", 
+          RowBox[{"{", "2", "}"}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"timeMatrixByHours", " ", "=", " ", 
+       RowBox[{"Floor", "/@", 
+        RowBox[{"(", 
+         RowBox[{"GetMatrix", "/@", 
+          RowBox[{"Map", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "szone", "]"}], "]"}], ",", " ", 
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "fzone", "]"}], "]"}]}], "}"}], ",", 
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "ftime", "]"}], "]"}], "-", 
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "stime", "]"}], "]"}]}]}], "}"}], "&"}], ",", 
+            "ordersByHours", ",", " ", 
+            RowBox[{"{", "2", "}"}]}], "]"}]}], ")"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"distanceMatrixByHours", ",", " ", "timeMatrixByHours"}], 
+       "}"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GetNearestZones", "[", "timeMatrixByHours_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"f", ",", "fm"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"f", "[", 
+       RowBox[{"i_", ",", " ", "l_"}], "]"}], ":=", 
+      RowBox[{"MapIndexed", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"i", ",", 
+           RowBox[{"First", "@", "#2"}], ",", "#"}], "}"}], "&"}], ",", "l"}],
+        "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"fm", "[", "l_", "]"}], ":=", " ", 
+      RowBox[{"Take", "[", 
+       RowBox[{
+        RowBox[{"DeleteCases", "[", 
+         RowBox[{
+          RowBox[{"SortBy", "[", 
+           RowBox[{"l", ",", " ", "Last"}], "]"}], ",", " ", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"x_", ",", "y_", ",", " ", "0"}], "}"}], "/;", 
+           RowBox[{"x", "!=", "y"}]}]}], "]"}], ",", " ", 
+        RowBox[{"UpTo", "[", "sampleSize", "]"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Map", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], "&"}], ",", "#"}], "]"}], "&"}],
+          ",", 
+         RowBox[{"fm", "/@", 
+          RowBox[{"MapIndexed", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"f", "[", 
+              RowBox[{
+               RowBox[{"First", "@", "#2"}], ",", "#"}], "]"}], "&"}], ",", 
+            "tm"}], "]"}]}]}], "]"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"tm", ",", " ", "timeMatrixByHours"}], "}"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GetNumberHour", "[", "order_", "]"}], ":=", " ", 
+  RowBox[{"Mod", "[", 
+   RowBox[{
+    RowBox[{"Floor", "@", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"order", "[", 
+        RowBox[{"[", "stime", "]"}], "]"}], "-", "1515704400000"}], 
+      RowBox[{" ", 
+       RowBox[{"60", "*", "60", "*", "1000"}]}]]}], ",", "24"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FlattenCon", "[", "l_List", "]"}], ":=", " ", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Length", "@", "l"}], "==", "1"}], ",", 
+     RowBox[{"l", "[", 
+      RowBox[{"[", "1", "]"}], "]"}], ",", "l"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"AddZ", "[", 
+    RowBox[{"coor_List", ",", " ", "coorZ_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Sequence", "@@", "#"}], ",", " ", "coorZ"}], "}"}], "&"}], 
+    " ", "/@", "coor"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PolygonZoneBorders", "[", 
+    RowBox[{"coordinates_List", ",", " ", "z1_", ",", " ", "z2_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"AddZ", "[", 
+          RowBox[{"#", ",", "z1"}], "]"}], "~", "Join", "~", 
+         RowBox[{"Reverse", "@", 
+          RowBox[{"AddZ", "[", 
+           RowBox[{"#", ",", "z2"}], "]"}]}]}], "&"}], ",", 
+       RowBox[{"Partition", "[", 
+        RowBox[{
+         RowBox[{"Append", "[", 
+          RowBox[{"coordinates", ",", 
+           RowBox[{"First", "@", "coordinates"}]}], "]"}], " ", ",", "2", ",",
+          " ", "1"}], "]"}]}], "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PolyhedronZone", "[", 
+    RowBox[{"p_List", ",", " ", "height_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"AddZ", "[", 
+      RowBox[{"p", ",", " ", "height"}], "]"}], "}"}], "~", "Join", "~", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"height", "!=", "1"}], ",", 
+      RowBox[{"PolygonZoneBorders", "[", 
+       RowBox[{"p", ",", "1", ",", "height"}], "]"}], ",", 
+      RowBox[{"{", "}"}]}], "]"}]}]}], ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.8783687684121013`*^9, 3.878368769343904*^9}, {
+  3.8783688087149816`*^9, 3.878368810183095*^9}, {3.878368988602043*^9, 
+  3.8783689933735633`*^9}, {3.8783690952556114`*^9, 3.878369138390725*^9}, {
+  3.8783691686096563`*^9, 3.8783691829053288`*^9}, {3.878376986239417*^9, 
+  3.878377080318898*^9}, {3.8786226863080487`*^9, 3.878622692495787*^9}, {
+  3.878638527260004*^9, 3.878638579801192*^9}, {3.878638624457365*^9, 
+  3.878638627960972*^9}},
+ CellLabel->"In[39]:=",ExpressionUUID->"9fbad27c-8f29-47f4-8a48-6f50cc7586c7"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{
+    RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+    "\"\<//data//taxi_zones\>\""}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dictionary", " ", "=", " ", 
+   RowBox[{"Drop", "[", 
+    RowBox[{
+     RowBox[{"Import", "[", "\"\<taxi+_zone_lookup.csv\>\"", "]"}], ",", 
+     "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"polygons", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"Import", "[", 
+     RowBox[{"\"\<taxi_zones.shp\>\"", ",", " ", "\"\<SHP\>\""}], "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "2", ",", "1", ",", "2"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"polygonsCoordinates", " ", "=", " ", 
+   RowBox[{"FlattenCon", "/@", 
+    RowBox[{"Flatten", "[", 
+     RowBox[{
+      RowBox[{"ToExpression", "@", 
+       RowBox[{"Import", "[", "\"\<otus.txt\>\"", "]"}]}], ",", "1"}], 
+     "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"centers", " ", "=", " ", 
+   RowBox[{"AddZ", "[", 
+    RowBox[{
+     RowBox[{"ToExpression", "[", 
+      RowBox[{"\"\<{\>\"", "<>", 
+       RowBox[{"StringReplace", "[", 
+        RowBox[{
+         RowBox[{"ToString", "@", 
+          RowBox[{"Import", "[", "\"\<centers.txt\>\"", "]"}]}], " ", ",", 
+         RowBox[{"\"\<\\n\>\"", "->", " ", "\"\<,\>\""}]}], "]"}], "<>", 
+       "\"\<}\>\""}], "]"}], ",", " ", "1"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8783687985601*^9, 3.8783687995869536`*^9}, {
+   3.8783692951671996`*^9, 3.8783693011395473`*^9}, 3.8783693442650394`*^9},
+ CellLabel->"In[93]:=",ExpressionUUID->"586e58aa-04d7-46cf-9de3-2b5c6a45f7a9"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", 
+   RowBox[{"Formatting", ",", "FillCar"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Formatting", "[", 
+    RowBox[{"{", 
+     RowBox[{
+     "stime_", ",", " ", "ftime_", ",", " ", "szone_", ",", " ", "fzone_", 
+      ",", " ", "distance_", ",", " ", "price_"}], "}"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"dateFormat", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<Day\>\"", ",", "\"\<.\>\"", ",", " ", "\"\<Month\>\"", ",", 
+         "\"\<.\>\"", ",", "\"\<Year\>\"", ",", " ", "\"\<  \>\"", ",", " ", 
+         "\"\<Time\>\""}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", " ", 
+      RowBox[{
+       RowBox[{"DateString", "[", 
+        RowBox[{
+         RowBox[{"DateObject", "@", 
+          RowBox[{"NormTime", "@", "stime"}]}], ",", " ", "dateFormat"}], 
+        "]"}], ",", " ", 
+       RowBox[{"DateString", "[", 
+        RowBox[{
+         RowBox[{"DateObject", "@", 
+          RowBox[{"NormTime", "@", "ftime"}]}], ",", "dateFormat"}], "]"}], 
+       ",", " ", 
+       RowBox[{"StringRiffle", "@", 
+        RowBox[{"dictionary", "[", 
+         RowBox[{"[", 
+          RowBox[{"szone", ",", " ", 
+           RowBox[{"2", ";;", "3"}]}], "]"}], "]"}]}], ",", "  ", 
+       RowBox[{"StringRiffle", "@", 
+        RowBox[{"dictionary", "[", 
+         RowBox[{"[", 
+          RowBox[{"fzone", ",", " ", 
+           RowBox[{"2", ";;", "3"}]}], "]"}], "]"}]}], ",", 
+       RowBox[{
+        RowBox[{"ToString", "@", " ", 
+         FractionBox["distance", "0.62137"]}], " ", "<>", "\"\<km\>\""}], ",", 
+       RowBox[{
+        RowBox[{"ToString", "@", "price"}], " ", "<>", "\"\<$\>\""}]}], 
+      "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FillCar", "[", 
+    RowBox[{"s_", "/;", " ", 
+     RowBox[{
+      RowBox[{"s", "[", 
+       RowBox[{"[", "gas", "]"}], "]"}], "<", "0"}]}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"d", " ", "=", " ", "s"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"d", "[", 
+        RowBox[{"[", "ft", "]"}], "]"}], "+=", "waitingTime"}], ";", 
+      RowBox[{
+       RowBox[{"d", "[", 
+        RowBox[{"[", "gas", "]"}], "]"}], "=", " ", "50"}], ";", " ", "d"}]}],
+     "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FillCar", "[", "s___", "]"}], ":=", "s"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8783691323386726`*^9, 3.8783691450013657`*^9}, {
+  3.8783700800595684`*^9, 3.8783701322351456`*^9}, {3.878375913547664*^9, 
+  3.8783759275345445`*^9}, {3.8786386450497756`*^9, 3.8786386462158513`*^9}, {
+  3.8786390372060146`*^9, 3.8786390763144937`*^9}},
+ CellLabel->"In[98]:=",ExpressionUUID->"f369fb11-b46f-42bb-8129-731487394900"],
+
+Cell[BoxData[{
+ RowBox[{"ClearAll", "[", 
+  RowBox[{"GetOrders", ",", " ", "GetCars", ",", " ", "GoOneDay"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GetOrders", "[", 
+   RowBox[{
+   "year_Integer", ",", " ", "month_Integer", ",", " ", "day_Integer"}], 
+   "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "orders", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"SetDirectory", "[", 
+      RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"orders", " ", "=", 
+      RowBox[{"Delete", "[", 
+       RowBox[{
+        RowBox[{"Import", "[", 
+         RowBox[{"\"\<data\\\\years\\\\\>\"", "<>", 
+          RowBox[{"OO", "@", "year"}], "<>", "\"\<\\\\\>\"", "<>", 
+          RowBox[{"OO", "@", "month"}], "<>", "\"\<\\\\\>\"", "<>", 
+          RowBox[{"OO", "@", "day"}], "<>", "\"\<.csv\>\""}], "]"}], ",", 
+        "1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"SortBy", "[", 
+      RowBox[{"orders", ",", " ", 
+       RowBox[{
+        RowBox[{"#", "[", 
+         RowBox[{"[", "stime", "]"}], "]"}], "&"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GetCars", "[", 
+   RowBox[{"orders_", ",", " ", "carsCount_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "carsDistribution", ",", " ", "carsDistributionInLine", ",", " ", 
+      "mainDistribution"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"carsDistribution", " ", "=", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"MapAt", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Round", "[", 
+            RowBox[{"#", "*", 
+             RowBox[{"carsCount", "/", 
+              RowBox[{"Length", "@", "orders"}]}]}], "]"}], "&"}], ",", "#", 
+          ",", "2"}], "]"}], "&"}], "/@", 
+       RowBox[{"SortBy", "[", 
+        RowBox[{
+         RowBox[{"Tally", "@", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "szone", "]"}], "]"}], "&"}], "/@", "orders"}], 
+           ")"}]}], ",", " ", "First"}], "]"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"carsDistributionInLine", " ", "=", " ", 
+      RowBox[{"Flatten", "[", 
+       RowBox[{"ConstantArray", "@@@", "carsDistribution"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"mainDistribution", "  ", "=", 
+      RowBox[{"carsDistributionInLine", "~", "Join", "~", 
+       RowBox[{"ConstantArray", "[", 
+        RowBox[{
+         RowBox[{"First", "@", 
+          RowBox[{"(", 
+           RowBox[{"Last", "@", "carsDistribution"}], ")"}]}], ",", 
+         RowBox[{"carsCount", "-", 
+          RowBox[{"Plus", " ", "@@", 
+           RowBox[{"carsDistribution", "[", 
+            RowBox[{"[", 
+             RowBox[{"All", ",", " ", "2"}], "]"}], "]"}]}]}]}], "]"}]}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"mainDistribution", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], ",", 
+         RowBox[{"MronTime", "@", 
+          RowBox[{"AbsoluteTime", "@", 
+           RowBox[{"DateObject", "[", 
+            RowBox[{"{", 
+             RowBox[{"year", ",", " ", "month", ",", "day"}], "}"}], 
+            "]"}]}]}], ",", "50", ",", " ", "0", ",", " ", "0"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "carsCount"}], "}"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GoOneDay", "[", 
+   RowBox[{"sortedOrders_", ",", " ", "carsCount_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "matrixSet", ",", " ", "cars", ",", " ", "nearestZones", " ", ",", 
+      "carsHab", ",", " ", 
+      RowBox[{"lostClients", " ", "=", " ", "0"}], ",", " ", "CarScope", ",", 
+      " ", "SelectCar"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"CarScope", "[", 
+       RowBox[{"order_List", ",", "car_List", ",", " ", "hour_"}], "]"}], ":=",
+       " ", 
+      RowBox[{"With", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"index", " ", "=", " ", 
+          RowBox[{"Sequence", "[", 
+           RowBox[{"hour", ",", 
+            RowBox[{"car", "[", 
+             RowBox[{"[", "fz", "]"}], "]"}], ",", 
+            RowBox[{"order", "[", 
+             RowBox[{"[", "szone", "]"}], "]"}]}], "]"}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Module", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"dist", " ", "=", " ", 
+             RowBox[{"matrixSet", "[", 
+              RowBox[{"[", 
+               RowBox[{"1", ",", "index"}], "]"}], "]"}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"time", " ", "=", "  ", 
+             RowBox[{"matrixSet", "[", 
+              RowBox[{"[", 
+               RowBox[{"2", ",", "index"}], "]"}], "]"}]}], ",", " ", 
+            "dopTime"}], "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"dopTime", " ", "=", " ", 
+            RowBox[{
+             RowBox[{"PositiveRound", "[", 
+              RowBox[{
+               RowBox[{"car", "[", 
+                RowBox[{"[", "ft", "]"}], "]"}], "-", 
+               RowBox[{"order", "[", 
+                RowBox[{"[", "stime", "]"}], "]"}]}], "]"}], "+", "time"}]}], 
+           " ", ";", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"waitingTime", "-", "dopTime"}], ",", " ", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"order", "[", 
+                RowBox[{"[", "fzone", "]"}], "]"}], ",", 
+               RowBox[{
+                RowBox[{"order", "[", 
+                 RowBox[{"[", "ftime", "]"}], "]"}], "+", "dopTime"}], " ", 
+               ",", 
+               RowBox[{
+                RowBox[{"car", "[", 
+                 RowBox[{"[", "gas", "]"}], "]"}], "-", "dist", "-", 
+                RowBox[{"order", "[", 
+                 RowBox[{"[", "distance", "]"}], "]"}]}], ",", " ", 
+               RowBox[{
+                RowBox[{"car", "[", 
+                 RowBox[{"[", "amount", "]"}], "]"}], "+", 
+                RowBox[{"order", "[", 
+                 RowBox[{"[", "price", "]"}], "]"}]}], ",", " ", 
+               RowBox[{
+                RowBox[{"car", "[", 
+                 RowBox[{"[", "count", "]"}], "]"}], "+", "1"}]}], "}"}]}], 
+            "}"}]}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"SelectCar", "[", "order_", "]"}], ":=", 
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"hour", " ", "=", " ", 
+           RowBox[{
+            RowBox[{"GetNumberHour", "[", "order", "]"}], "+", "1"}]}], ",", 
+          " ", "scope", ",", " ", "selectedCar"}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"selectedCar", "=", 
+          RowBox[{"Flatten", "@", 
+           RowBox[{"MinimalBy", "[", 
+            RowBox[{
+             RowBox[{"Map", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"#", ",", 
+                  RowBox[{"cars", "[", 
+                   RowBox[{"[", "#", "]"}], "]"}]}], "}"}], "&"}], ",", 
+               RowBox[{"Map", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"carsHab", "[", 
+                    RowBox[{"[", "#", "]"}], "]"}], "[", "\"\<EmptyQ\>\"", 
+                    "]"}], ",", "Nothing", ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"carsHab", "[", 
+                    RowBox[{"[", "#", "]"}], "]"}], "[", "\"\<Peek\>\"", 
+                    "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "&"}], ",", 
+                 RowBox[{"nearestZones", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"hour", ",", 
+                    RowBox[{"order", "[", 
+                    RowBox[{"[", "szone", "]"}], "]"}]}], "]"}], "]"}]}], 
+                "]"}]}], "]"}], ",", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", 
+                RowBox[{"2", ",", "ft"}], "]"}], "]"}], "&"}], ",", " ", 
+             RowBox[{"UpTo", "[", "1", "]"}]}], "]"}]}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"selectedCar", " ", "!=", " ", 
+            RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"scope", "=", 
+             RowBox[{"CarScope", "[", 
+              RowBox[{"order", ",", " ", 
+               RowBox[{"selectedCar", "[", 
+                RowBox[{"[", 
+                 RowBox[{"2", ";;"}], "]"}], "]"}], ",", " ", "hour"}], 
+              "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"Module", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"carId", " ", "=", " ", 
+                 RowBox[{"selectedCar", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+                "\[IndentingNewLine]", 
+                RowBox[{"dopTime", " ", "=", " ", 
+                 RowBox[{"scope", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+                "\[IndentingNewLine]", " ", 
+                RowBox[{"newCar", " ", "=", " ", 
+                 RowBox[{"scope", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{"dopTime", ">=", "0"}], ",", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"carsHab", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"cars", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"carId", ",", "fz"}], "]"}], "]"}], "]"}], "]"}], 
+                  "[", "\"\<Pop\>\"", "]"}], ";", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"carsHab", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"newCar", "[", 
+                    RowBox[{"[", "fz", "]"}], "]"}], "]"}], "]"}], "[", 
+                  RowBox[{"\"\<Push\>\"", ",", " ", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", 
+                    RowBox[{"newCar", "[", 
+                    RowBox[{"[", "ft", "]"}], "]"}]}], ",", " ", "carId"}], 
+                    "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"cars", "[", 
+                   RowBox[{"[", "carId", "]"}], "]"}], "=", " ", 
+                  RowBox[{"FillCar", "@", "newCar"}]}], ";", 
+                 "\[IndentingNewLine]", "carId"}], ",", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"lostClients", "++"}], ";", " ", 
+                 RowBox[{"-", "1"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+             "\[IndentingNewLine]", "]"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"lostClients", "++"}], ";", " ", 
+            RowBox[{"-", "1"}]}]}], "\[IndentingNewLine]", "]"}]}]}], 
+       "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"matrixSet", " ", "=", " ", 
+      RowBox[{"GetMatrixSet", "[", "sortedOrders", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"cars", " ", "=", " ", 
+      RowBox[{"GetCars", "[", 
+       RowBox[{"sortedOrders", ",", " ", "carsCount"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"nearestZones", " ", "=", " ", 
+      RowBox[{"GetNearestZones", "[", 
+       RowBox[{"matrixSet", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"carsHab", " ", "=", " ", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"CreateDataStructure", "[", "\"\<PriorityQueue\>\"", "]"}], 
+        ",", " ", "263"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"MapIndexed", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"carsHab", "[", 
+          RowBox[{"[", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "fz", "]"}], "]"}], "]"}], "]"}], "[", 
+         RowBox[{"\"\<Push\>\"", ",", " ", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "ft", "]"}], "]"}]}], ",", 
+            RowBox[{"#2", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}], "&"}], ",", 
+       "cars"}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Sequence", "@@", 
+        RowBox[{"AbsoluteTiming", "[", 
+         RowBox[{"SelectCar", "/@", " ", "sortedOrders"}], "]"}]}], ",", 
+       RowBox[{"PercentForm", "[", 
+        FractionBox[
+         RowBox[{
+          RowBox[{"Length", "@", "sortedOrders"}], "-", "lostClients", "+", 
+          "0."}], 
+         RowBox[{"Length", "@", "sortedOrders"}]], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Total", "@", 
+        RowBox[{"cars", "[", 
+         RowBox[{"[", 
+          RowBox[{"All", ",", " ", "amount"}], "]"}], "]"}]}]}], "}"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.8743162284163876`*^9, 3.874316230333088*^9}, {
+   3.8743171425648723`*^9, 3.8743171644758463`*^9}, 3.874317203119771*^9, {
+   3.8743177014134026`*^9, 3.874317710787836*^9}, {3.8743187924435563`*^9, 
+   3.8743188736202984`*^9}, {3.874318906709977*^9, 3.874318980512065*^9}, {
+   3.874319082389964*^9, 3.874319258568494*^9}, {3.8743193037519503`*^9, 
+   3.874319311487404*^9}, {3.874319605570157*^9, 3.8743196072340097`*^9}, {
+   3.8743197258548317`*^9, 3.874319776541011*^9}, {3.8743200247902284`*^9, 
+   3.874320087983001*^9}, {3.8743201438340764`*^9, 3.87432015189896*^9}, {
+   3.8743201870357046`*^9, 3.8743202237394066`*^9}, {3.874320897463478*^9, 
+   3.8743209097682276`*^9}, {3.874321065891277*^9, 3.8743212503714776`*^9}, {
+   3.8743214730845656`*^9, 3.874321477815997*^9}, {3.874321951991408*^9, 
+   3.8743219572146187`*^9}, {3.8743220185132737`*^9, 
+   3.8743220254015613`*^9}, {3.8743223859794765`*^9, 3.874322391217535*^9}, {
+   3.874322525534008*^9, 3.8743225460335064`*^9}, {3.8743257293656015`*^9, 
+   3.87432586074743*^9}, {3.874330649293529*^9, 3.8743307315729246`*^9}, {
+   3.8743313868834968`*^9, 3.8743314087127423`*^9}, {3.8743943417661066`*^9, 
+   3.874394342382658*^9}, {3.874394752393064*^9, 3.8743947731866307`*^9}, {
+   3.8776824940433674`*^9, 3.8776825020745907`*^9}, {3.8776876634548426`*^9, 
+   3.87768767601315*^9}, {3.8777582688891344`*^9, 3.877758339354227*^9}, {
+   3.8777647403360586`*^9, 3.8777647413597064`*^9}, {3.877764843115738*^9, 
+   3.8777648686995783`*^9}, {3.8777649093364472`*^9, 3.8777650403268642`*^9}, 
+   3.8777650852415285`*^9, {3.877765249567086*^9, 3.8777654926009617`*^9}, {
+   3.8777656325123625`*^9, 3.877765635229493*^9}, {3.877765859016959*^9, 
+   3.8777658910495453`*^9}, {3.8777659682660203`*^9, 
+   3.8777659899213114`*^9}, {3.877766099790126*^9, 3.8777661013302727`*^9}, 
+   3.8777662502334776`*^9, {3.877766321900799*^9, 3.877766369333479*^9}, {
+   3.877766437910843*^9, 3.877766445616658*^9}, {3.8777664975879374`*^9, 
+   3.8777665097218003`*^9}, 3.8777679484967403`*^9, {3.877782388439192*^9, 
+   3.877782393881777*^9}, {3.877848307382834*^9, 3.8778483139510803`*^9}, {
+   3.877852209299779*^9, 3.877852216085657*^9}, {3.8778528307617917`*^9, 
+   3.8778528333433976`*^9}, {3.8778528902686872`*^9, 
+   3.8778528905756364`*^9}, {3.877853043834687*^9, 3.877853082249449*^9}, {
+   3.8778531150571747`*^9, 3.877853135054098*^9}, {3.8778531994384155`*^9, 
+   3.877853226337693*^9}, {3.8778546213123865`*^9, 3.877854635704344*^9}, {
+   3.8778547270806475`*^9, 3.8778547710569515`*^9}, {3.8782709643093805`*^9, 
+   3.878271025407895*^9}, {3.8783756074472027`*^9, 3.8783756159321957`*^9}, 
+   3.878375673206608*^9, {3.8783758958510666`*^9, 3.878375909959672*^9}, {
+   3.8783766925765457`*^9, 3.878376741136525*^9}, {3.878376788520792*^9, 
+   3.878376935593528*^9}, {3.878377006356135*^9, 3.8783770212212086`*^9}, {
+   3.878377085941376*^9, 3.87837718668476*^9}, {3.8786386521400566`*^9, 
+   3.8786386663928366`*^9}, {3.87871580404941*^9, 3.878715804536024*^9}},
+ CellLabel->
+  "In[102]:=",ExpressionUUID->"61fc9a19-b720-4215-a44e-a7812e281e28"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"GetDayDemandMap", "[", "orders_List", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "group", ",", "polygonStatistics", ",", "polyhedrons", ",", "sizes", ",",
+       "groupedPolyhedrons", ",", "bar", ",", "\[IndentingNewLine]", " ", 
+      RowBox[{"mapOfZones", " ", "=", " ", 
+       RowBox[{"ConstantArray", "[", 
+        RowBox[{"0", ",", "263"}], "]"}]}], ",", "\[IndentingNewLine]", 
+      RowBox[{"viewPoint", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{"0.506", ",", 
+         RowBox[{"-", "2.633"}], ",", "2.477"}], "}"}]}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"viewVert", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.003"}], ",", " ", "0.004", ",", " ", "0.999"}], 
+        "}"}]}], ",", "\[IndentingNewLine]", 
+      RowBox[{"tooltip", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Background", "\[Rule]", "LightGray"}], ",", 
+         RowBox[{"FontSize", "\[Rule]", "Medium"}], ",", 
+         RowBox[{"CellFrame", "\[Rule]", "0"}]}], "}"}]}], ",", 
+      "\[IndentingNewLine]", " ", "ColorF", ",", "GetLebel"}], 
+     "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ColorF", "[", "x_", "]"}], ":=", 
+      RowBox[{"Which", "[", 
+       RowBox[{
+        RowBox[{"x", " ", "<=", "100"}], ",", 
+        RowBox[{"RGBColor", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0", ",", "0", ",", "0.1"}], "}"}], "]"}], ",", 
+        "\[IndentingNewLine]", " ", 
+        RowBox[{"x", "<=", "5000"}], ",", " ", 
+        RowBox[{"RGBColor", "[", 
+         RowBox[{"{", 
+          RowBox[{
+          "0.09803921568627451`", ",", "0.1803921568627451`", ",", 
+           "0.3568627450980392`", ",", 
+           RowBox[{
+            RowBox[{"(", "x", ")"}], "/", "5000"}]}], "}"}], "]"}], ",", 
+        "\[IndentingNewLine]", " ", 
+        RowBox[{"x", " ", "<=", "10000"}], ",", "  ", 
+        RowBox[{"RGBColor", "[", 
+         RowBox[{"{", 
+          RowBox[{
+          "0.11764705882352941`", ",", "0.396078431372549`", ",", 
+           "0.6549019607843137`", ",", 
+           FractionBox[
+            RowBox[{"x", "-", "5000"}], "5000"]}], "}"}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"x", "<=", " ", "20000"}], ",", " ", 
+        RowBox[{"RGBColor", "[", 
+         RowBox[{"{", 
+          RowBox[{
+          "0.4392156862745098`", ",", "0.807843137254902`", ",", 
+           "0.8156862745098039`", ",", 
+           FractionBox[
+            RowBox[{"x", "-", "10000"}], "10000"]}], "}"}], "]"}], ",", 
+        "\[IndentingNewLine]", "True", ",", " ", 
+        RowBox[{"RGBColor", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"2", " ", "-", " ", 
+            RowBox[{
+             RowBox[{"(", "x", ")"}], "/", "50000"}]}], ",", "0", ",", "0", 
+           ",", "1"}], "}"}], "]"}]}], "\[IndentingNewLine]", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"GetLebel", "[", "i_", "]"}], ":=", 
+      RowBox[{
+       RowBox[{"ToString", "@", 
+        RowBox[{"mapOfZones", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], "<>", "\"\<, \>\"", "<>", 
+       RowBox[{"ToString", "@", 
+        RowBox[{"dictionary", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", ",", "2"}], "]"}], "]"}]}], "<>", "\"\<, \>\"", "<>", 
+       RowBox[{"dictionary", "[", 
+        RowBox[{"[", 
+         RowBox[{"i", ",", "3"}], "]"}], "]"}]}]}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"mapOfZones", "[", 
+          RowBox[{"[", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], "=", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "&"}], "/@", " ", 
+      RowBox[{"Tally", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "szone", "]"}], "]"}], "&"}], "/@", "orders"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"group", " ", "=", 
+      RowBox[{"Length", "/@", "polygons"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"polygonStatistics", " ", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Sequence", "@@", 
+         RowBox[{"ConstantArray", "[", 
+          RowBox[{
+           RowBox[{"mapOfZones", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
+           RowBox[{"group", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "263"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"polyhedrons", " ", "=", " ", 
+      RowBox[{"Polyhedron", "/@", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"PolyhedronZone", "[", 
+          RowBox[{
+           RowBox[{"polygonsCoordinates", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], ",", 
+           RowBox[{"polygonStatistics", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{"Length", "@", "polygonsCoordinates"}]}], " ", "}"}]}], 
+        "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"sizes", " ", "=", " ", 
+      RowBox[{"Prepend", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"#", "+", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "0"}], "}"}]}], "&"}], "/@", 
+         RowBox[{"Partition", "[", 
+          RowBox[{
+           RowBox[{"Accumulate", "@", 
+            RowBox[{"(", 
+             RowBox[{"Length", "/@", "polygons"}], ")"}]}], ",", "2", ",", 
+           "1"}], "]"}]}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]}], "]"}]}], " ", ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"groupedPolyhedrons", " ", "=", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"polyhedrons", "[", 
+         RowBox[{"[", 
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ";;", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}], "&"}], "/@", 
+       "sizes"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"bar", " ", "=", " ", 
+      RowBox[{"BarLegend", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"ColorF", "/@", 
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"i", "*", "1000"}], ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", " ", "0", ",", "20"}], "}"}]}], "]"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "1000"}], ",", "20000"}], "}"}]}], "}"}], ",", 
+        "19"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Legended", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Graphics3D", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"MapIndexed", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"FaceForm", "[", 
+               RowBox[{"ColorF", "[", 
+                RowBox[{"mapOfZones", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"#2", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], "]"}], "]"}],
+               ",", 
+              RowBox[{"EdgeForm", "[", "]"}], ",", 
+              RowBox[{"Tooltip", "[", 
+               RowBox[{"#", ",", 
+                RowBox[{"GetLebel", "[", 
+                 RowBox[{"#2", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", " ", 
+                RowBox[{"TooltipStyle", "\[Rule]", "tooltip"}]}], "]"}]}], 
+             "}"}], "&"}], " ", ",", "groupedPolyhedrons"}], "]"}], ",", " ", 
+         RowBox[{"ImageSize", "->", "500"}], ",", " ", 
+         RowBox[{"Boxed", "->", "False"}], ",", " ", 
+         RowBox[{"ViewPoint", "\[Rule]", "viewPoint"}], ",", " ", 
+         RowBox[{"ViewVertical", "->", "viewVert"}]}], "]"}], ",", "bar"}], 
+      "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.878368826697317*^9, 3.878368827734584*^9}, {
+   3.878720774291409*^9, 3.8787207746835213`*^9}, {3.8787539775283146`*^9, 
+   3.878753980433831*^9}, {3.878754084464239*^9, 3.878754108674024*^9}, 
+   3.8787542649939785`*^9, {3.8787542968058767`*^9, 3.878754313573224*^9}},
+ CellLabel->
+  "In[106]:=",ExpressionUUID->"9023df7f-6b43-4f7f-984c-e0d174032431"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"GetCarWayMap", "[", "way_List", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", " ", 
+     RowBox[{
+     "sizes", ",", "polyhedrons", ",", " ", "groupedPolyhedrons", ",", 
+      "polyhedronsMask", ",", "arrows", ",", "\[IndentingNewLine]", 
+      RowBox[{"viewPoint", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{"0.506", ",", 
+         RowBox[{"-", "2.633"}], ",", "2.477"}], "}"}]}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"viewVert", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.003"}], ",", " ", "0.004", ",", " ", "0.999"}], 
+        "}"}]}], ",", " ", "\[IndentingNewLine]", 
+      RowBox[{"startColor", " ", "=", " ", 
+       TemplateBox[<|
+        "color" -> RGBColor[
+          0.09803921568627451, 0.1803921568627451, 0.3568627450980392]|>,
+        "RGBColorSwatchTemplate"]}], ",", "\[IndentingNewLine]", 
+      RowBox[{"finishColor", " ", "=", 
+       TemplateBox[<|
+        "color" -> RGBColor[
+          0.4392156862745098, 0.807843137254902, 0.8156862745098039]|>,
+        "RGBColorSwatchTemplate"]}]}], "\[IndentingNewLine]", "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"SetDirectory", "[", 
+      RowBox[{
+       RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+       "\"\<//data//taxi_zones\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"polyhedronsMask", " ", "=", 
+      RowBox[{"MapIndexed", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Sequence", "@@", 
+          RowBox[{"ConstantArray", "[", 
+           RowBox[{
+            RowBox[{"#2", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ",", "#"}], "]"}]}], "&"}], ",", 
+        RowBox[{"Length", "/@", "polygons"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"polyhedrons", " ", "=", " ", 
+      RowBox[{"MapIndexed", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Polyhedron", "[", 
+          RowBox[{"PolyhedronZone", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"MemberQ", "[", 
+               RowBox[{"way", ",", 
+                RowBox[{"polyhedronsMask", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"#2", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}]}], "]"}], ",",
+               " ", "3000", ",", "1"}], "]"}]}], "]"}], "]"}], "&"}], ",", 
+        "polygonsCoordinates"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"sizes", " ", "=", " ", 
+      RowBox[{"Prepend", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"#", "+", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "0"}], "}"}]}], "&"}], "/@", 
+         RowBox[{"Partition", "[", 
+          RowBox[{
+           RowBox[{"Accumulate", "@", 
+            RowBox[{"(", 
+             RowBox[{"Length", "/@", "polygons"}], ")"}]}], ",", "2", ",", 
+           "1"}], "]"}]}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]}], "]"}]}], " ", ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"groupedPolyhedrons", " ", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"FaceForm", "[", 
+           
+           TemplateBox[<|
+            "color" -> RGBColor[
+              0.1450980392156863, 0.7019607843137254, 0.5882352941176471, 
+               0.23]|>,
+            "RGBColorSwatchTemplate"], "]"}], ",", 
+          RowBox[{"EdgeForm", "[", 
+           RowBox[{"Thickness", "[", "0.0003", "]"}], "]"}], ",", " ", 
+          RowBox[{"polyhedrons", "[", 
+           RowBox[{"[", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], ";;", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}]}], "}"}], "&"}], 
+       "/@", "sizes"}]}], ";", "\[IndentingNewLine]", " ", 
+     RowBox[{"MapIndexed", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"groupedPolyhedrons", "[", 
+           RowBox[{"[", 
+            RowBox[{"#", ",", 
+             RowBox[{"1", ";;", "2"}]}], "]"}], "]"}], "=", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"FaceForm", "@", 
+             RowBox[{
+              StyleBox["Blend",
+               ShowSpecialCharacters->False,
+               ShowStringCharacters->True,
+               NumberMarks->True], 
+              StyleBox["[",
+               ShowSpecialCharacters->False,
+               ShowStringCharacters->True,
+               NumberMarks->True], 
+              RowBox[{
+               StyleBox[
+                RowBox[{"{", 
+                 RowBox[{"startColor", ",", " ", "finishColor"}], "}"}],
+                ShowSpecialCharacters->False,
+                ShowStringCharacters->True,
+                NumberMarks->True], 
+               StyleBox[",",
+                ShowSpecialCharacters->False,
+                ShowStringCharacters->True,
+                NumberMarks->True], 
+               StyleBox[" ",
+                ShowSpecialCharacters->False,
+                ShowStringCharacters->True,
+                NumberMarks->True], 
+               FractionBox[
+                RowBox[{
+                 StyleBox[
+                  RowBox[{"First", "@", "#2"}],
+                  ShowSpecialCharacters->False,
+                  ShowStringCharacters->True,
+                  NumberMarks->True], "-", "1"}], 
+                RowBox[{
+                 RowBox[{"Length", "@", "way"}], "-", "1"}]]}], "]"}]}], 
+            StyleBox[",",
+             ShowSpecialCharacters->False,
+             ShowStringCharacters->True,
+             NumberMarks->True], 
+            StyleBox[" ",
+             ShowSpecialCharacters->False,
+             ShowStringCharacters->True,
+             NumberMarks->True], 
+            RowBox[{"EdgeForm", "[", "]"}]}], 
+           StyleBox["}",
+            ShowSpecialCharacters->False,
+            ShowStringCharacters->True,
+            NumberMarks->True]}]}], 
+         StyleBox[")",
+          ShowSpecialCharacters->False,
+          ShowStringCharacters->True,
+          NumberMarks->True]}], "&"}], ",", "way"}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"arrows", " ", "=", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Tube", "[", 
+         RowBox[{
+          RowBox[{"BezierCurve", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"ReplacePart", "[", 
+              RowBox[{
+               RowBox[{"First", "@", "#"}], ",", 
+               RowBox[{"3", "->", "3000"}]}], "]"}], ",", 
+             RowBox[{"ReplacePart", "[", 
+              RowBox[{
+               FractionBox[
+                RowBox[{"Plus", "@@", "#"}], "2"], ",", 
+               RowBox[{"3", "->", " ", 
+                RowBox[{
+                 RowBox[{"0.3", "*", 
+                  RowBox[{"(", 
+                   RowBox[{"EuclideanDistance", "@@", "#"}], ")"}]}], "+", 
+                 "3000"}]}]}], "]"}], ",", 
+             RowBox[{"ReplacePart", "[", 
+              RowBox[{
+               RowBox[{"Last", "@", "#"}], ",", 
+               RowBox[{"3", "->", "3000"}]}], "]"}]}], "}"}], "]"}], ",", " ",
+           "600"}], "]"}], "&"}], "/@", 
+       RowBox[{"Partition", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"centers", "[", 
+            RowBox[{"[", "#", "]"}], "]"}], "&"}], "/@", "way"}], ",", "2", 
+         ",", "1"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Legended", "[", 
+      RowBox[{
+       RowBox[{"Graphics3D", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"groupedPolyhedrons", ",", 
+           RowBox[{"MapIndexed", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 StyleBox["Blend",
+                  ShowSpecialCharacters->False,
+                  ShowStringCharacters->True,
+                  NumberMarks->True], 
+                 StyleBox["[",
+                  ShowSpecialCharacters->False,
+                  ShowStringCharacters->True,
+                  NumberMarks->True], 
+                 RowBox[{
+                  StyleBox[
+                   RowBox[{"{", 
+                    RowBox[{"startColor", ",", " ", "finishColor"}], "}"}],
+                   ShowSpecialCharacters->False,
+                   ShowStringCharacters->True,
+                   NumberMarks->True], 
+                  StyleBox[",",
+                   ShowSpecialCharacters->False,
+                   ShowStringCharacters->True,
+                   NumberMarks->True], 
+                  StyleBox[" ",
+                   ShowSpecialCharacters->False,
+                   ShowStringCharacters->True,
+                   NumberMarks->True], 
+                  FractionBox[
+                   RowBox[{
+                    StyleBox[
+                    RowBox[{"2", "*", 
+                    RowBox[{"First", "@", "#2"}]}],
+                    ShowSpecialCharacters->False,
+                    ShowStringCharacters->True,
+                    NumberMarks->True], "-", "1"}], 
+                   RowBox[{"2", "*", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"Length", "@", "way"}], "-", "1"}], ")"}]}]]}], 
+                 "]"}], ",", " ", "#"}], "}"}], "&"}], ",", "arrows"}], 
+            "]"}]}], "}"}], ",", " ", 
+         RowBox[{"Boxed", "->", "False"}], ",", " ", 
+         RowBox[{"ViewPoint", "\[Rule]", "viewPoint"}], ",", 
+         RowBox[{"ImageSize", "->", "1000"}], ",", " ", 
+         RowBox[{"ViewVertical", "->", "viewVert"}]}], "]"}], ",", 
+       RowBox[{"PointLegend", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"startColor", ",", "finishColor"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<\:0421\:0442\:0430\:0440\:0442\>\"", ",", 
+           "\"\<\:0424\:0438\:043d\:0438\:0448\>\""}], "}"}], ",", " ", 
+         RowBox[{"LegendMarkerSize", "->", "30"}]}], "]"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.8783688820076823`*^9, 3.878368882863021*^9}, {
+   3.8783692401547985`*^9, 3.878369257269367*^9}, {3.8783693885294733`*^9, 
+   3.8783694676562805`*^9}, 3.8783696524062834`*^9, {3.8786454725547457`*^9, 
+   3.878645482325853*^9}, {3.8786456258352776`*^9, 3.878645640090687*^9}, 
+   3.8786456963643093`*^9, {3.8786472412156944`*^9, 3.8786472423377666`*^9}, {
+   3.8786472891944923`*^9, 3.8786472943287115`*^9}},
+ CellLabel->
+  "In[107]:=",ExpressionUUID->"e510e945-067d-4018-b320-99a1f18c73c4"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetTimeLine", "[", "order_", "]"}], ":=", " ", 
+   RowBox[{"TimelinePlot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"DateInterval", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"DateObject", "@", 
+          RowBox[{"NormTime", "@", "#"}]}], "&"}], "/@", 
+        RowBox[{"order", "[", 
+         RowBox[{"[", " ", 
+          RowBox[{"stime", ";;", "ftime"}], "]"}], "]"}]}], "]"}], "}"}], ",", 
+     RowBox[{"Filling", "\[Rule]", "Below"}], " ", ",", " ", 
+     RowBox[{"GridLines", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Automatic", ",", "None"}], "}"}]}], ",", " ", 
+     RowBox[{"Spacings", "\[Rule]", 
+      RowBox[{"{", "3", "}"}]}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetOrderData", "[", "order_", "]"}], ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"dataNames", "=", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<\:041a\:043b\:0438\:043d\:0442 \:0441\:0435\:043b \:0432 \:043c\
+\:0430\:0448\:0438\:043d\:0443\>\"", ",", " ", 
+          "\"\<\:041f\:043e\:0435\:0437\:0434\:043a\:0430 \:043e\:043a\:043e\
+\:043d\:0447\:0435\:043d\:0430\>\"", ",", " ", 
+          "\"\<\:0420\:0430\:0439\:043e\:043d \:043d\:0430\:0447\:0430\:043b\
+\:0430\>\"", ",", 
+          "\"\<\:0420\:0430\:0439\:043e\:043d \:043e\:043a\:043e\:043d\:0447\
+\:0430\:043d\:0438\:044f\>\"", ",", 
+          "\"\<\:041f\:0440\:043e\:0439\:0434\:0435\:043d\:043e\:0435 \:0440\
+\:0430\:0441\:0441\:0442\:043e\:044f\:043d\:0438\:0435\>\"", ",", 
+          "\"\<\:0426\:0435\:043d\:0430\>\""}], "}"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"dataIndexes", " ", "=", 
+        RowBox[{"{", 
+         RowBox[{
+         "stime", ",", " ", "ftime", ",", " ", "szone", ",", " ", "fzone", 
+          ",", " ", "distance", ",", " ", "price"}], "}"}]}]}], "}"}], ",", 
+     RowBox[{"Dataset", "[", 
+      RowBox[{"List", "@", 
+       RowBox[{"AssociationThread", "[", 
+        RowBox[{"dataNames", "\[Rule]", 
+         RowBox[{"Formatting", "[", 
+          RowBox[{"order", "[", 
+           RowBox[{"[", "dataIndexes", "]"}], "]"}], "]"}]}], "]"}]}], 
+      "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"GetDayCarReportByOrder", "[", "order_", "]"}], ":=", " ", 
+    RowBox[{"Column", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Row", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Labeled", "[", 
+            RowBox[{
+             RowBox[{"GetOrderData", "@", "order"}], ",", 
+             RowBox[{"Style", "[", 
+              RowBox[{
+              "\"\<\:041e\:0442\:0447\:0435\:0442 \:043f\:043e \:0437\:0430\
+\:043a\:0430\:0437\:0443\>\"", ",", " ", 
+               RowBox[{"FontSize", "->", "Large"}], ",", " ", 
+               RowBox[{"FontFamily", "->", "\"\<Times\>\""}]}], "]"}], ",", 
+             "Top"}], "]"}], ",", 
+           RowBox[{"Spacer", "[", "10", "]"}], ",", 
+           RowBox[{"GetTimeLine", "@", "order"}]}], " ", "}"}], ",", " ", 
+         RowBox[{"ImageMargins", "->", "10"}], ",", " ", 
+         RowBox[{"ImageSize", "->", "1000"}]}], "]"}], ",", 
+       RowBox[{"GetCarWayMap", "[", 
+        RowBox[{"order", "[", 
+         RowBox[{"[", " ", 
+          RowBox[{"szone", ";;", "fzone"}], "]"}], "]"}], "]"}]}], "}"}], 
+     "]"}]}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.8783637430017834`*^9, 3.878364076442876*^9}, {
+   3.87836412638522*^9, 3.878364214158905*^9}, {3.8783645150956616`*^9, 
+   3.8783645185554686`*^9}, {3.878367998874398*^9, 3.878368069189567*^9}, {
+   3.878368219301593*^9, 3.8783682277083225`*^9}, {3.8783682585685363`*^9, 
+   3.878368373182042*^9}, {3.878368412899165*^9, 3.8783684627617645`*^9}, 
+   3.8783699178686285`*^9, {3.8783699616608515`*^9, 3.878369963814245*^9}, {
+   3.878370004601239*^9, 3.8783700271958447`*^9}, {3.8783701553148823`*^9, 
+   3.878370175055833*^9}, {3.8783702140632105`*^9, 3.8783703094247274`*^9}, {
+   3.8783705025746155`*^9, 3.8783705282531567`*^9}, {3.878370591368849*^9, 
+   3.8783705961452026`*^9}, {3.8783706422639437`*^9, 
+   3.8783706589341755`*^9}, {3.878370691628746*^9, 3.8783707594116697`*^9}, {
+   3.878370791709852*^9, 3.8783707963490047`*^9}, {3.8783708315244436`*^9, 
+   3.878370858727703*^9}, {3.8783711063546047`*^9, 3.878371107402423*^9}, {
+   3.8783735087847557`*^9, 3.878373513271345*^9}, 3.8786386791303387`*^9, 
+   3.8786390511157146`*^9, {3.878720758721071*^9, 3.8787207684586887`*^9}},
+ CellLabel->
+  "In[108]:=",ExpressionUUID->"e027ea96-7a90-4bbf-9439-bd49ab5f1820"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", 
+   RowBox[{"GetCarReport", ",", " ", "GetCarWay", ",", "GetCarOrders"}], 
+   "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetCarOrders", " ", "[", 
+    RowBox[{"orders_", ",", " ", "report_", ",", " ", "carId_"}], "]"}], ":=",
+    " ", 
+   RowBox[{"orders", "[", 
+    RowBox[{"[", 
+     RowBox[{"Sequence", "@@@", 
+      RowBox[{"Position", "[", 
+       RowBox[{
+        RowBox[{"report", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], ",", "carId"}], "]"}]}], "]"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetCarReport", "[", 
+    RowBox[{
+    "orders_", ",", "report_", ",", "carId_", ",", " ", "carsCount_"}], "]"}],
+    ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"carOrders", " ", "=", " ", 
+        RowBox[{"GetCarOrders", "[", 
+         RowBox[{"orders", ",", "report", ",", "carId"}], "]"}]}], ",", 
+       "\[IndentingNewLine]", "matrixSet", ",", "CarScope", ",", "car"}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"CarScope", "[", 
+        RowBox[{"car_List", ",", "order_List"}], "]"}], ":=", " ", 
+       RowBox[{"Module", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"hour", " ", "=", " ", 
+            RowBox[{
+             RowBox[{"GetNumberHour", "[", "order", "]"}], "+", "1"}]}], ",", 
+           "index", ",", "dist", ",", "time", ",", " ", "dopTime", ",", " ", 
+           "newCar"}], "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"index", " ", "=", " ", 
+           RowBox[{"Sequence", "[", 
+            RowBox[{"hour", ",", 
+             RowBox[{"car", "[", 
+              RowBox[{"[", "fz", "]"}], "]"}], ",", 
+             RowBox[{"order", "[", 
+              RowBox[{"[", "szone", "]"}], "]"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"dist", " ", "=", " ", 
+           RowBox[{"matrixSet", "[", 
+            RowBox[{"[", 
+             RowBox[{"1", ",", "index"}], "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"time", " ", "=", "  ", 
+           RowBox[{"matrixSet", "[", 
+            RowBox[{"[", 
+             RowBox[{"2", ",", "index"}], "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"dopTime", " ", "=", " ", 
+           RowBox[{
+            RowBox[{"PositiveRound", "[", 
+             RowBox[{
+              RowBox[{"car", "[", 
+               RowBox[{"[", "ft", "]"}], "]"}], "-", 
+              RowBox[{"order", "[", 
+               RowBox[{"[", "stime", "]"}], "]"}]}], "]"}], "+", "time"}]}], 
+          " ", ";", "\[IndentingNewLine]", 
+          RowBox[{"newCar", "=", " ", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"order", "[", 
+              RowBox[{"[", "fzone", "]"}], "]"}], ",", 
+             RowBox[{
+              RowBox[{"order", "[", 
+               RowBox[{"[", "ftime", "]"}], "]"}], "+", "dopTime"}], " ", ",", 
+             RowBox[{
+              RowBox[{"car", "[", 
+               RowBox[{"[", "gas", "]"}], "]"}], "-", "dist", "-", 
+              RowBox[{"order", "[", 
+               RowBox[{"[", "distance", "]"}], "]"}]}], ",", " ", 
+             RowBox[{
+              RowBox[{"car", "[", 
+               RowBox[{"[", "amount", "]"}], "]"}], "+", 
+              RowBox[{"order", "[", 
+               RowBox[{"[", "price", "]"}], "]"}]}], ",", " ", 
+             RowBox[{
+              RowBox[{"car", "[", 
+               RowBox[{"[", "count", "]"}], "]"}], "+", "1"}]}], "}"}]}], ";",
+           "\[IndentingNewLine]", " ", 
+          RowBox[{"FillCar", "@", "newCar"}]}]}], "\[IndentingNewLine]", 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"matrixSet", " ", "=", " ", 
+       RowBox[{"GetMatrixSet", "[", "orders", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"car", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"GetCars", "[", 
+         RowBox[{"orders", ",", " ", "carsCount"}], "]"}], "[", 
+        RowBox[{"[", "carId", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"FoldList", "[", 
+       RowBox[{"CarScope", ",", "car", ",", "carOrders"}], "]"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetCarWay", "[", "carReport_", "]"}], ":=", 
+   RowBox[{"carReport", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.878373527193932*^9, 3.8783735278568845`*^9}, {
+   3.878374967980438*^9, 3.8783749821920867`*^9}, {3.8783751539102397`*^9, 
+   3.8783751595987415`*^9}, {3.8783752983210106`*^9, 3.878375318907441*^9}, {
+   3.8783754518093243`*^9, 3.878375455861949*^9}, 3.878375719395353*^9, {
+   3.878375998594637*^9, 3.878376006307502*^9}, 3.8783761971649456`*^9, {
+   3.878376494013748*^9, 3.8783765264075813`*^9}, 3.878376575641265*^9, {
+   3.8783766080619726`*^9, 3.8783766133655033`*^9}, {3.878377207505018*^9, 
+   3.878377223058711*^9}, {3.878377461017249*^9, 3.878377468593446*^9}, {
+   3.878377514509796*^9, 3.878377619608324*^9}, {3.8783776622226973`*^9, 
+   3.8783778028667774`*^9}, {3.878377833982309*^9, 3.878377868582595*^9}, {
+   3.878377899588559*^9, 3.8783779032388535`*^9}, {3.8783780060308475`*^9, 
+   3.878378009798878*^9}, 3.8783781890662584`*^9, {3.878378276395839*^9, 
+   3.8783783102819595`*^9}, {3.87837834762709*^9, 3.8783783920323386`*^9}, {
+   3.8783784506350393`*^9, 3.8783784909067554`*^9}, {3.8783786345451603`*^9, 
+   3.8783787365031986`*^9}, 3.878632789473131*^9, {3.8786386861209717`*^9, 
+   3.878638687591344*^9}, 3.8786468584744253`*^9},
+ CellLabel->
+  "In[111]:=",ExpressionUUID->"4e28de5c-d729-4f04-b523-d7870e20fd78"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"3000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"33.58%\"\>",
+        ShowStringCharacters->False],
+       0.33576662988427697`,
+       AutoDelete->True],
+      PercentForm], ",", "645609.27`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"42.79%\"\>",
+        ShowStringCharacters->False],
+       0.4278923690688397,
+       AutoDelete->True],
+      PercentForm], ",", "764800.27`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"5000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"51.96%\"\>",
+        ShowStringCharacters->False],
+       0.5196149166737403,
+       AutoDelete->True],
+      PercentForm], ",", "870705.7700000005`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"6000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"60.39%\"\>",
+        ShowStringCharacters->False],
+       0.6039067142008319,
+       AutoDelete->True],
+      PercentForm], ",", "954842.4100000001`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"7000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"68.21%\"\>",
+        ShowStringCharacters->False],
+       0.6821223438870498,
+       AutoDelete->True],
+      PercentForm], ",", "1.0172007500000005`*^6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"8900000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"75.43%\"\>",
+        ShowStringCharacters->False],
+       0.7543007101830632,
+       AutoDelete->True],
+      PercentForm], ",", "1.0456194000000004`*^6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"9000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"82.13%\"\>",
+        ShowStringCharacters->False],
+       0.8213083213083213,
+       AutoDelete->True],
+      PercentForm], ",", "1.0463228400000008`*^6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"87.46%\"\>",
+        ShowStringCharacters->False],
+       0.874564977506154,
+       AutoDelete->True],
+      PercentForm], ",", "992417.0000000009`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"11000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"92.21%\"\>",
+        ShowStringCharacters->False],
+       0.9220637750049515,
+       AutoDelete->True],
+      PercentForm], ",", "915313.5200000014`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"12000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"95.14%\"\>",
+        ShowStringCharacters->False],
+       0.9513694366635543,
+       AutoDelete->True],
+      PercentForm], ",", "762958.8000000007`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"13000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"96.28%\"\>",
+        ShowStringCharacters->False],
+       0.9628179554650144,
+       AutoDelete->True],
+      PercentForm], ",", "525413.7000000002`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"14000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"96.89%\"\>",
+        ShowStringCharacters->False],
+       0.9689471748295279,
+       AutoDelete->True],
+      PercentForm], ",", "262532.42000000086`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"15000", ",", 
+     TagBox[
+      InterpretationBox[
+       StyleBox["\<\"97.36%\"\>",
+        ShowStringCharacters->False],
+       0.9736369295192825,
+       AutoDelete->True],
+      PercentForm], ",", 
+     RowBox[{"-", "18067.330000000075`"}]}], "}"}]}], "}"}]], "Input",
+ CellChangeTimes->{{3.878651903913835*^9, 
+  3.878651904176027*^9}},ExpressionUUID->"bd4bd0a3-8951-4896-9a96-\
+22d34a0503df"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"GetDayCarDemandMap", "[", "cars_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "group", ",", "polygonStatistics", ",", "polyhedrons", ",", "sizes", 
+       ",", "groupedPolyhedrons", ",", "bar", ",", "max", ",", 
+       "\[IndentingNewLine]", " ", 
+       RowBox[{"mapOfZones", " ", "=", " ", 
+        RowBox[{"ConstantArray", "[", 
+         RowBox[{"0", ",", "263"}], "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"viewPoint", " ", "=", " ", 
+        RowBox[{"{", 
+         RowBox[{"0.506", ",", 
+          RowBox[{"-", "2.633"}], ",", "2.477"}], "}"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"viewVert", " ", "=", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "0.003"}], ",", " ", "0.004", ",", " ", "0.999"}], 
+         "}"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"tooltip", " ", "=", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Background", "\[Rule]", "LightGray"}], ",", 
+          RowBox[{"FontSize", "\[Rule]", "Medium"}], ",", 
+          RowBox[{"CellFrame", "\[Rule]", "0"}]}], "}"}]}], ",", 
+       "\[IndentingNewLine]", " ", "ColorF", ",", "GetLebel"}], 
+      "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"ColorF", "[", "x_", "]"}], ":=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"x", " ", "==", "0"}], ",", " ", "LightGray", ",", 
+         RowBox[{
+          StyleBox["Blend",
+           ShowSpecialCharacters->False,
+           ShowStringCharacters->True,
+           NumberMarks->True], 
+          StyleBox["[",
+           ShowSpecialCharacters->False,
+           ShowStringCharacters->True,
+           NumberMarks->True], 
+          RowBox[{
+           StyleBox[
+            RowBox[{"{", 
+             RowBox[{
+              TemplateBox[<|"color" -> RGBColor[0.67, 1, 1]|>,
+               "RGBColorSwatchTemplate"], ",", " ", 
+              
+              TemplateBox[<|
+               "color" -> 
+                RGBColor[
+                 0.09803921568627451, 0.1803921568627451, 0.3568627450980392]|>,
+               "RGBColorSwatchTemplate"]}], "}"}],
+            ShowSpecialCharacters->False,
+            ShowStringCharacters->True,
+            NumberMarks->True], 
+           StyleBox[",",
+            ShowSpecialCharacters->False,
+            ShowStringCharacters->True,
+            NumberMarks->True], 
+           FractionBox[
+            StyleBox["x",
+             ShowSpecialCharacters->False,
+             ShowStringCharacters->True,
+             NumberMarks->True], "max"]}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"GetLebel", "[", "i_", "]"}], ":=", 
+       RowBox[{
+        RowBox[{"ToString", "@", 
+         RowBox[{"mapOfZones", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}], "<>", "\"\<, \>\"", "<>", 
+        RowBox[{"ToString", "@", 
+         RowBox[{"dictionary", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "2"}], "]"}], "]"}]}], "<>", "\"\<, \>\"", "<>", 
+        RowBox[{"dictionary", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", ",", "3"}], "]"}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"mapOfZones", "[", 
+           RowBox[{"[", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], "+=", "1"}], ")"}],
+         "&"}], "/@", 
+       RowBox[{"GetCars", "[", 
+        RowBox[{"orders", ",", " ", "9000"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"max", " ", "=", " ", 
+       RowBox[{"Max", "[", "mapOfZones", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"group", " ", "=", 
+       RowBox[{"Length", "/@", "polygons"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"polygonStatistics", " ", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Sequence", "@@", 
+          RowBox[{"ConstantArray", "[", 
+           RowBox[{
+            RowBox[{"mapOfZones", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
+            RowBox[{"group", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", "263"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"polyhedrons", " ", "=", " ", 
+       RowBox[{"Polyhedron", "/@", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"PolyhedronZone", "[", 
+           RowBox[{
+            RowBox[{"polygonsCoordinates", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", 
+            RowBox[{
+             RowBox[{"polygonStatistics", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "*", "30"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", 
+            RowBox[{"Length", "@", "polygonsCoordinates"}]}], " ", "}"}]}], 
+         "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"sizes", " ", "=", " ", 
+       RowBox[{"Prepend", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "+", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", "0"}], "}"}]}], "&"}], "/@", 
+          RowBox[{"Partition", "[", 
+           RowBox[{
+            RowBox[{"Accumulate", "@", 
+             RowBox[{"(", 
+              RowBox[{"Length", "/@", "polygons"}], ")"}]}], ",", "2", ",", 
+            "1"}], "]"}]}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1"}], "}"}]}], "]"}]}], " ", ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"groupedPolyhedrons", " ", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"polyhedrons", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ";;", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}], "&"}], "/@", 
+        "sizes"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"bar", " ", "=", " ", 
+       RowBox[{"BarLegend", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"ColorF", "/@", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{
+               FractionBox[
+                RowBox[{"i", "-", "1"}], "10"], "*", "400"}], ",", " ", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", " ", "11"}], "}"}]}], "]"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "40"}], ",", "400"}], "}"}]}], "}"}], ",", "10"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Legended", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Graphics3D", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"MapIndexed", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"FaceForm", "[", 
+                 RowBox[{"ColorF", "[", 
+                  RowBox[{"mapOfZones", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"#2", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], "]"}], 
+                 "]"}], ",", 
+                RowBox[{"EdgeForm", "[", "]"}], ",", 
+                RowBox[{"Tooltip", "[", 
+                 RowBox[{"#", ",", 
+                  RowBox[{"GetLebel", "[", 
+                   RowBox[{"#2", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", " ", 
+                  RowBox[{"TooltipStyle", "\[Rule]", "tooltip"}]}], "]"}]}], 
+               "}"}], "&"}], " ", ",", "groupedPolyhedrons"}], "]"}], "[", 
+           RowBox[{"[", 
+            RowBox[{"First", "/@", 
+             RowBox[{"Position", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"dictionary", "[", 
+                 RowBox[{"[", 
+                  RowBox[{";;", 
+                   RowBox[{"-", "3"}]}], "]"}], "]"}], "[", 
+                RowBox[{"[", 
+                 RowBox[{"All", ",", "2"}], "]"}], "]"}], " ", ",", 
+               "\"\<Manhattan\>\""}], "]"}]}], "]"}], "]"}], ",", " ", 
+          RowBox[{"ImageSize", "->", "400"}], ",", " ", 
+          RowBox[{"Boxed", "->", "False"}], ",", " ", 
+          RowBox[{"ViewPoint", "\[Rule]", "viewPoint"}], ",", " ", 
+          RowBox[{"ViewVertical", "->", "viewVert"}], ",", " ", 
+          RowBox[{"Lighting", "\[Rule]", "\"\<ThreePoint\>\""}]}], "]"}], ",",
+         "bar"}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.878652214945117*^9, 3.8786522286815643`*^9}, {
+   3.878652352229169*^9, 3.878652381698312*^9}, {3.8786524798038774`*^9, 
+   3.878652528451125*^9}, {3.878652666226227*^9, 3.8786527411443872`*^9}, {
+   3.878652823907571*^9, 3.878652884366495*^9}, {3.878652917261311*^9, 
+   3.8786529196988363`*^9}, {3.8786530530386667`*^9, 
+   3.8786530640435257`*^9}, {3.878653147041099*^9, 3.8786531522481174`*^9}, {
+   3.87865319236287*^9, 3.8786532118525114`*^9}, {3.8786533361609364`*^9, 
+   3.8786533369677334`*^9}, {3.878653395572894*^9, 3.8786533967254505`*^9}, {
+   3.878653477269022*^9, 3.8786534793969483`*^9}, {3.8786535540736723`*^9, 
+   3.87865356418557*^9}, {3.8786536573886137`*^9, 3.878653658374073*^9}, 
+   3.8786538168858843`*^9, {3.8786538796037035`*^9, 3.8786538825712276`*^9}, {
+   3.8786539403214936`*^9, 3.87865400216962*^9}, {3.878654082050227*^9, 
+   3.878654083202064*^9}, {3.87865412303346*^9, 3.87865413572571*^9}, {
+   3.8786541684909353`*^9, 3.878654175552903*^9}, {3.878654480646081*^9, 
+   3.8786544810443993`*^9}, {3.878667140664341*^9, 3.8786671505688477`*^9}, 
+   3.8786672015905914`*^9, {3.878667249104889*^9, 3.878667263853982*^9}, {
+   3.878667307948569*^9, 3.8786673080680857`*^9}, 3.878753808743887*^9},
+ CellLabel->
+  "In[115]:=",ExpressionUUID->"5c0a7093-0326-4b85-ba10-cf035d1871b9"]
+},
+WindowSize->{1261., 745.5},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+TaggingRules-><|"TryRealOnly" -> False|>,
+Magnification:>1. Inherited,
+FrontEndVersion->"13.1 for Microsoft Windows (64-bit) (August 22, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"66d0e81d-8e53-4c1f-a117-cc7e5c22078c"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 2703, 59, 355, "Input",ExpressionUUID->"1aafb0a5-1645-45ce-8c12-fbf736648291"],
+Cell[3286, 83, 180, 2, 32, "Output",ExpressionUUID->"01ac501b-2896-4757-8de1-ef147f109f44"]
+}, Open  ]],
+Cell[3481, 88, 11015, 302, 639, "Input",ExpressionUUID->"9fbad27c-8f29-47f4-8a48-6f50cc7586c7"],
+Cell[14499, 392, 1672, 42, 105, "Input",ExpressionUUID->"586e58aa-04d7-46cf-9de3-2b5c6a45f7a9"],
+Cell[16174, 436, 2838, 75, 180, "Input",ExpressionUUID->"f369fb11-b46f-42bb-8129-731487394900"],
+Cell[19015, 513, 16777, 377, 1049, "Input",ExpressionUUID->"61fc9a19-b720-4215-a44e-a7812e281e28"],
+Cell[35795, 892, 8496, 211, 614, "Input",ExpressionUUID->"9023df7f-6b43-4f7f-984c-e0d174032431"],
+Cell[44294, 1105, 10590, 269, 445, "Input",ExpressionUUID->"e510e945-067d-4018-b320-99a1f18c73c4"],
+Cell[54887, 1376, 4702, 102, 200, "Input",ExpressionUUID->"e027ea96-7a90-4bbf-9439-bd49ab5f1820"],
+Cell[59592, 1480, 5804, 132, 352, "Input",ExpressionUUID->"4e28de5c-d729-4f04-b523-d7870e20fd78"],
+Cell[65399, 1614, 3691, 123, 86, "Input",ExpressionUUID->"bd4bd0a3-8951-4896-9a96-22d34a0503df"],
+Cell[69093, 1739, 9930, 236, 539, "Input",ExpressionUUID->"5c0a7093-0326-4b85-ba10-cf035d1871b9"]
+}
+]
+*)
+
